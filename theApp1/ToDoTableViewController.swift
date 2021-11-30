@@ -78,10 +78,32 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
                 let newIndexPath = IndexPath(row: todos.count, section: 0)
                 todos.append(todo)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
+                switch sourceViewController.remindMeSwitch.isOn {
+                case true:
+                    todo.schedule(todo: todo) { (permissionGranted) in
+                        if !permissionGranted {
+                            self.presentNeedAuthorizationAlert()
+                        }
+                    }
+                default: break
+                }
+                
             }
         }
         ToDo.saveToDos(todos)
     }
+    
+    func presentNeedAuthorizationAlert() {
+        let title = "Authorization needed"
+        let message = "We need you to grant permission to send you reminders. Please go to iOS Settings app and grant us notification permissions."
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> ToDoDetailTableViewController? {
         guard let cell = sender as? UITableViewCell,
               let indexPath = tableView.indexPath(for: cell) else {return nil}

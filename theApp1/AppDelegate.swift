@@ -1,10 +1,20 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        
+        let remindTomorrowAction = UNNotificationAction(identifier: ToDo.remindActionID, title: "Remind Tomorrow", options: [])
+        let todoIsDoneAction = UNNotificationAction(identifier: ToDo.doneActionID, title: "Already Done", options: [])
+        
+        let todoCategory = UNNotificationCategory(identifier: ToDo.notificationCategoryId, actions: [remindTomorrowAction, todoIsDoneAction], intentIdentifiers: [], options: [])
+        
+        center.setNotificationCategories([todoCategory])
+
         return true
     }
 
