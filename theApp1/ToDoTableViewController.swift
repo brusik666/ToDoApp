@@ -9,7 +9,12 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     
+    typealias DataSource = UITableViewDiffableDataSource<String, ToDo>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<String, ToDo>
+    
     var todos = [ToDo]()
+    var todoSnapshot: Snapshot!
+    var tableViewDataSource: DataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,23 +24,23 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             todos = ToDo.loadSampleTodos()
         }
         configuringBarButtonItems()
+        
+        todoSnapshot = Snapshot()
+        todoSnapshot.appendSections(["1"])
+        todoSnapshot.appendItems(todos, toSection: "1")
+
+        configureTableViewDataSource(tableView)
+        tableViewDataSource.apply(todoSnapshot)
     
     }
-
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todos.count
-    }
-
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! ToDoCellTableViewCell
-        let todo = todos[indexPath.row]
-        cell.titleLabel.text = todo.title
-        cell.isCompleteButton.isSelected = todo.isComplete
-        cell.delegate = self
-            
-        return cell
+    func configureTableViewDataSource(_ tableView: UITableView) {
+        tableViewDataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! ToDoCellTableViewCell
+            cell.delegate = self
+            cell.configure(with: todo)
+            return cell
+        })
     }
     
     func configuringBarButtonItems() {
@@ -71,25 +76,15 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         let sourceViewController = segue.source as! ToDoDetailTableViewController
         
         if let todo = sourceViewController.todo {
-            if let indexOfExistingToDo = todos.firstIndex(of: todo) {
-                todos[indexOfExistingToDo] = todo
-                tableView.reloadRows(at: [IndexPath(row: indexOfExistingToDo, section: 0)], with: .automatic)
-            } else {
-                let newIndexPath = IndexPath(row: todos.count, section: 0)
-                todos.append(todo)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-                switch sourceViewController.remindMeSwitch.isOn {
-                case true:
-                    todo.schedule(todo: todo) { (permissionGranted) in
-                        if !permissionGranted {
-                            self.presentNeedAuthorizationAlert()
-                        }
-                    }
-                default: break
-                }
+            if let indexOfExistingTodo = todos.firstIndex(of: todo) {
+                todos[indexOfExistingTodo] = todo
                 
+            } else {
+                todos.append(todo)
+                todoSnapshot.appendItems([todo], toSection: "1")
             }
         }
+        tableViewDataSource.apply(todoSnapshot)
         ToDo.saveToDos(todos)
     }
     

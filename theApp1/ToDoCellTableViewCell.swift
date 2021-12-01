@@ -28,6 +28,11 @@ class ToDoCellTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configure(with todo: ToDo) {
+        self.titleLabel.text = todo.title
+        self.isCompleteButton.isSelected = todo.isComplete
+    }
 
     @IBAction func completeButtonTapped(_ sender: UIButton) {
         delegate?.checkMarkTapped(sender: self)

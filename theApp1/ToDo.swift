@@ -21,7 +21,7 @@ struct ToDo: Equatable, Codable, Hashable {
     static let archiveURL = documentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
     
     static func ==(lhs: ToDo, rhs: ToDo) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.title == rhs.title
     }
     
     static func loadToDos() -> [ToDo]? {
