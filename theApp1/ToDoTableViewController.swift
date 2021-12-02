@@ -9,8 +9,9 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     
-    typealias DataSource = UITableViewDiffableDataSource<String, ToDo>
+    typealias DataSource = CustomDataSource
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, ToDo>
+    let section = "1"
     
     var todos = [ToDo]()
     var todoSnapshot: Snapshot!
@@ -25,10 +26,8 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         }
         configuringBarButtonItems()
         
-        todoSnapshot = Snapshot()
-        todoSnapshot.appendSections(["1"])
-        todoSnapshot.appendItems(todos, toSection: "1")
-
+        
+        configureSnapshot()
         configureTableViewDataSource(tableView)
         tableViewDataSource.apply(todoSnapshot)
     
@@ -38,9 +37,17 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         tableViewDataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell in
             let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! ToDoCellTableViewCell
             cell.delegate = self
-            cell.configure(with: todo)
+            cell.isCompleteButton.isSelected = todo.isComplete
+            cell.titleLabel.text = todo.title
+
             return cell
         })
+    }
+    
+    func configureSnapshot() {
+        todoSnapshot = Snapshot()
+        todoSnapshot.appendSections([section])
+        todoSnapshot.appendItems(todos, toSection: section)
     }
     
     func configuringBarButtonItems() {
@@ -64,6 +71,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             ToDo.saveToDos(todos)
+            print("xyu")
             
         //} else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -81,10 +89,10 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
                 
             } else {
                 todos.append(todo)
-                todoSnapshot.appendItems([todo], toSection: "1")
+                todoSnapshot.appendItems([todo], toSection: section)
             }
         }
-        tableViewDataSource.apply(todoSnapshot)
+        tableViewDataSource.apply(todoSnapshot, animatingDifferences: false, completion: nil)
         ToDo.saveToDos(todos)
     }
     
@@ -109,11 +117,16 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     }
     
     func checkMarkTapped(sender: ToDoCellTableViewCell) {
+        
         if let indexPath = tableView.indexPath(for: sender) {
             var todo = todos[indexPath.row]
             todo.isComplete.toggle()
             todos[indexPath.row] = todo
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+       //     sender.configure(with: todo)
+            var snapshot = Snapshot()
+            snapshot.appendSections([section])
+            snapshot.appendItems(todos)
+            tableViewDataSource.apply(snapshot, animatingDifferences: false, completion: nil)
             ToDo.saveToDos(todos)
         }
     }
@@ -127,5 +140,4 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         }
         
     }
-    
 }

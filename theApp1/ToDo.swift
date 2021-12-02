@@ -8,6 +8,7 @@ struct ToDo: Equatable, Codable, Hashable {
     var isComplete: Bool
     var dueDate: Date
     var notes: String?
+    var reminder = Reminder()
     
     
     static let dueDateFormatter: DateFormatter = {
@@ -21,7 +22,7 @@ struct ToDo: Equatable, Codable, Hashable {
     static let archiveURL = documentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
     
     static func ==(lhs: ToDo, rhs: ToDo) -> Bool {
-        return lhs.title == rhs.title
+        return lhs.title == rhs.title || lhs.id == rhs.id
     }
     
     static func loadToDos() -> [ToDo]? {
@@ -46,68 +47,6 @@ struct ToDo: Equatable, Codable, Hashable {
     
 }
 
-extension ToDo {
-    private func authorizeIfNeeded(completion: @escaping (Bool) -> ()) {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { (settings) in
-            switch settings.authorizationStatus {
-            case .authorized:
-                completion(true)
-                
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { (granted, _) in
-                    completion(granted)
-                }
-                
-            case .denied, .provisional:
-                completion(false)
-            default: break
-            }
-        }
-    }
-    
-    static let notificationCategoryId = "ToDoNotification"
-    static let remindActionID = "remindTomorrow"
-    static let doneActionID = "done"
-}
 
-extension ToDo {
-    func schedule(todo: ToDo, completion: @escaping (Bool) -> ()) {
-        authorizeIfNeeded { (granted) in
-            guard granted else {
-                DispatchQueue.main.async {
-                    completion(false)
-                }
-                
-                return
-            }
-            let content = UNMutableNotificationContent()
-            content.title = "Reminder"
-            content.body = "\(todo.title) in 24 hours."
-            content.sound = UNNotificationSound.default
-            content.categoryIdentifier = ToDo.notificationCategoryId
-            
-            let triggerDateComponents = Calendar.current.dateComponents([.minute, .hour, .day, .month], from: self.dueDate.addingTimeInterval(-86400))
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: id.uuidString, content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        print(error.localizedDescription)
-                        completion(false)
-                    } else {
-                        completion(true)
-                    }
-                }
-            }
-        }
-    }
-    
-    func unschedule(todo: ToDo) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [todo.id.uuidString])
-    }
-}
 
 

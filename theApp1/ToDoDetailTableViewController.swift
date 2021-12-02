@@ -32,6 +32,7 @@ class ToDoDetailTableViewController: UITableViewController {
             dueDatePickerView.date = todo.dueDate
             isCompleteButton.isSelected = todo.isComplete
             notesTextView.text = todo.notes
+
         } else {
             dueDatePickerView.date = Date().addingTimeInterval(24*60*60)
         }
@@ -93,5 +94,6 @@ class ToDoDetailTableViewController: UITableViewController {
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text
         todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+        
     }
 }

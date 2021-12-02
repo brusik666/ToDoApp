@@ -8,10 +8,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         
-        let remindTomorrowAction = UNNotificationAction(identifier: ToDo.remindActionID, title: "Remind Tomorrow", options: [])
-        let todoIsDoneAction = UNNotificationAction(identifier: ToDo.doneActionID, title: "Already Done", options: [])
+        let remindTomorrowAction = UNNotificationAction(identifier: Reminder.remindActionID, title: "Remind Tomorrow", options: [])
+        let todoIsDoneAction = UNNotificationAction(identifier: Reminder.doneActionID, title: "Already Done", options: [])
         
-        let todoCategory = UNNotificationCategory(identifier: ToDo.notificationCategoryId, actions: [remindTomorrowAction, todoIsDoneAction], intentIdentifiers: [], options: [])
+        let todoCategory = UNNotificationCategory(identifier: Reminder.notificationCategoryId, actions: [remindTomorrowAction, todoIsDoneAction], intentIdentifiers: [], options: [])
         
         center.setNotificationCategories([todoCategory])
 
