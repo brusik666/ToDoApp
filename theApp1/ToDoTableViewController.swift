@@ -6,16 +6,29 @@
 //
 
 import UIKit
+import UserNotifications
 
-class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNotificationCenterDelegate {
     
     typealias DataSource = CustomDataSource
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, ToDo>
-    let section = "1"
     
-    var todos = [ToDo]()
-    var todoSnapshot: Snapshot!
+    let section = "1"
+    let todoReminderManager = Reminder.shared
+    
+    var todos = [ToDo]() {
+        didSet {
+            ToDo.saveToDos(todos)
+        }
+    }
+    var todoSnapshot: Snapshot {
+        var snapshot = Snapshot()
+        snapshot.appendSections([section])
+        snapshot.appendItems(todos, toSection: section)
+        return snapshot
+    }
     var tableViewDataSource: DataSource!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +38,9 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             todos = ToDo.loadSampleTodos()
         }
         configuringBarButtonItems()
-        
-        
-        configureSnapshot()
         configureTableViewDataSource(tableView)
         tableViewDataSource.apply(todoSnapshot)
-    
+
     }
     
     func configureTableViewDataSource(_ tableView: UITableView) {
@@ -43,35 +53,18 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             return cell
         })
     }
-    
-    func configureSnapshot() {
-        todoSnapshot = Snapshot()
-        todoSnapshot.appendSections([section])
-        todoSnapshot.appendItems(todos, toSection: section)
-    }
-    
+
     func configuringBarButtonItems() {
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
-    
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    
 
-    
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            ToDo.saveToDos(todos)
-            print("xyu")
             
         //} else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -89,11 +82,9 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
                 
             } else {
                 todos.append(todo)
-                todoSnapshot.appendItems([todo], toSection: section)
             }
         }
         tableViewDataSource.apply(todoSnapshot, animatingDifferences: false, completion: nil)
-        ToDo.saveToDos(todos)
     }
     
     func presentNeedAuthorizationAlert() {
@@ -122,12 +113,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             var todo = todos[indexPath.row]
             todo.isComplete.toggle()
             todos[indexPath.row] = todo
-       //     sender.configure(with: todo)
-            var snapshot = Snapshot()
-            snapshot.appendSections([section])
-            snapshot.appendItems(todos)
-            tableViewDataSource.apply(snapshot, animatingDifferences: false, completion: nil)
-            ToDo.saveToDos(todos)
+            tableViewDataSource.apply(todoSnapshot, animatingDifferences: false, completion: nil)
         }
     }
     func shareButtonTapped(sender: ToDoCellTableViewCell) {
@@ -138,6 +124,6 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             
             present(activityController, animated: true, completion: nil)
         }
-        
     }
+    
 }

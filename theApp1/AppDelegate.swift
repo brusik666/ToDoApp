@@ -2,26 +2,22 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         
-        let remindTomorrowAction = UNNotificationAction(identifier: Reminder.remindActionID, title: "Remind Tomorrow", options: [])
-        let todoIsDoneAction = UNNotificationAction(identifier: Reminder.doneActionID, title: "Already Done", options: [])
-        
-        let todoCategory = UNNotificationCategory(identifier: Reminder.notificationCategoryId, actions: [remindTomorrowAction, todoIsDoneAction], intentIdentifiers: [], options: [])
-        
-        center.setNotificationCategories([todoCategory])
-
         return true
     }
 
+     
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
+        // Called when a new scene session is beaing created.
+        // Called when a new scene session is beaing created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }

@@ -9,13 +9,18 @@ import Foundation
 import UIKit
 
 class CustomDataSource: UITableViewDiffableDataSource<String, ToDo> {
-    
-    var todos = [ToDo]()
+
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-    }
+  /*  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        if let item = self.itemIdentifier(for: indexPath) {
+            var snapshot = self.snapshot()
+            snapshot.deleteItems([item])
+            self.apply(snapshot, animatingDifferences: true, completion: nil)
+            
+        }
+    } */
 }
