@@ -1,14 +1,14 @@
 import Foundation
 import UserNotifications
+import UIKit
 
 struct ToDo: Equatable, Codable, Hashable {
 
-    var id = UUID()
+  //  let id: UUID
     var title: String
     var isComplete: Bool
     var dueDate: Date
     var notes: String?
-    var remindNotificationsScheduled: Bool = false
     
     static let dueDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -21,7 +21,7 @@ struct ToDo: Equatable, Codable, Hashable {
     static let archiveURL = documentsDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
     
     static func ==(lhs: ToDo, rhs: ToDo) -> Bool {
-        return lhs.title == rhs.title //|| lhs.id == rhs.id
+        return lhs.title == rhs.title
     }
     
     static func loadToDos() -> [ToDo]? {

@@ -20,14 +20,14 @@
                         <color key="sectionIndexBackgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="todoCell" id="pZ0-cA-vqn" customClass="ToDoCellTableViewCell" customModule="theApp1" customModuleProvider="target">
-                                <rect key="frame" x="20" y="32" width="374" height="43"/>
+                                <rect key="frame" x="20" y="32" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pZ0-cA-vqn" id="Bie-Qi-06n">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwS-Hc-0gj">
-                                            <rect key="frame" x="8" y="8" width="28" height="27"/>
+                                            <rect key="frame" x="8" y="8.5" width="28" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="28" id="bkL-Wh-gzK"/>
                                             </constraints>
@@ -43,13 +43,13 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr5-l7-cU8">
-                                            <rect key="frame" x="44" y="11" width="262" height="21"/>
+                                            <rect key="frame" x="44" y="11" width="262" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goa-Gy-FAx">
-                                            <rect key="frame" x="314" y="10.5" width="40" height="22"/>
+                                            <rect key="frame" x="314" y="11" width="40" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="gnZ-yg-McH"/>
                                             </constraints>

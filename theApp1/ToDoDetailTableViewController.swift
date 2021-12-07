@@ -12,10 +12,12 @@ class ToDoDetailTableViewController: UITableViewController {
     let todoReminderManager = Reminder.shared
     
     var isDatePickerHidden = true
+    var shouldRemindSwitchBeenOn = false
     var dateLabelIndexPath = IndexPath(row: 0, section: 1)
     var datePickerIndexPath = IndexPath(row: 1, section: 1)
     var notesIndexPath = IndexPath(row: 0, section: 2)
     var todo: ToDo?
+    
     
     @IBOutlet var isCompleteButton: UIButton!
     @IBOutlet var titleTextField: UITextField!
@@ -35,17 +37,13 @@ class ToDoDetailTableViewController: UITableViewController {
             dueDatePickerView.date = todo.dueDate
             isCompleteButton.isSelected = todo.isComplete
             notesTextView.text = todo.notes
-            remindMeSwitch.isOn = todo.remindNotificationsScheduled
-
         } else {
             dueDatePickerView.date = Date().addingTimeInterval(24*60*60)
         }
-        
+        remindMeSwitch.isOn = shouldRemindSwitchBeenOn
         updateSaveButtonState()
         updateDueDateLabel(date: dueDatePickerView.date)
     }
-    
-    
     
     func updateSaveButtonState() {
         let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
@@ -70,7 +68,7 @@ class ToDoDetailTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  /*  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch  indexPath {
         case datePickerIndexPath where isDatePickerHidden == true :
             return 0
@@ -79,7 +77,7 @@ class ToDoDetailTableViewController: UITableViewController {
         default:
             return UITableView.automaticDimension
         }
-    }
+    }*/
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == dateLabelIndexPath {
@@ -89,6 +87,8 @@ class ToDoDetailTableViewController: UITableViewController {
             tableView.beginUpdates()
             tableView.endUpdates()
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,21 +100,18 @@ class ToDoDetailTableViewController: UITableViewController {
         let isComplete = isCompleteButton.isSelected
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text
+        
         todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
         
-        if !todo!.remindNotificationsScheduled  && remindMeSwitch.isOn {
-            self.todoReminderManager.schedule(todo: todo!) { (scheduled) in
-                guard scheduled else {
-                    let vc = segue.destination as? ToDoTableViewController
-                    vc?.presentNeedAuthorizationAlert()
-                    return
-                }
-                self.todo!.remindNotificationsScheduled = true
-                print("PIZZZDA")
+        guard remindMeSwitch.isOn else {
+            todoReminderManager.unschedule(todoWithIdentifier: title)
+            return
+        }
+        todoReminderManager.schedule(todoWithIdentifier: title, triggeringDate: dueDate) { authorizationPermissionGranted in
+            if !authorizationPermissionGranted {
+                let todoTableViewController = segue.destination as! ToDoTableViewController
+                todoTableViewController.presentNeedAuthorizationAlert()
             }
-        } else if !remindMeSwitch.isOn && todo!.remindNotificationsScheduled {
-            todoReminderManager.unschedule(todo: todo!)
-            todo!.remindNotificationsScheduled = false
         }
     }
 }

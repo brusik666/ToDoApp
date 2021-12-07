@@ -18,6 +18,7 @@
 		EEBF601F26BF32A100ED357B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBF601D26BF32A100ED357B /* LaunchScreen.storyboard */; };
 		EEBF602926BF3CE800ED357B /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF602826BF3CE800ED357B /* ToDo.swift */; };
 		EEBF602B26BF4EDF00ED357B /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF602A26BF4EDF00ED357B /* ToDoTableViewController.swift */; };
+		EEF68037275D9689003B673B /* ProtocolReminderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF68036275D9689003B673B /* ProtocolReminderDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		EEBF602026BF32A100ED357B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEBF602826BF3CE800ED357B /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		EEBF602A26BF4EDF00ED357B /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
+		EEF68036275D9689003B673B /* ProtocolReminderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolReminderDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 		EEBF600626BF32A000ED357B = {
 			isa = PBXGroup;
 			children = (
+				EEF68036275D9689003B673B /* ProtocolReminderDelegate.swift */,
 				EEBF601126BF32A000ED357B /* theApp1 */,
 				EEBF601026BF32A000ED357B /* Products */,
 			);
@@ -158,6 +161,7 @@
 				EE15E86C2758F4270016A941 /* DiffableDataSource.swift in Sources */,
 				EEBF602B26BF4EDF00ED357B /* ToDoTableViewController.swift in Sources */,
 				EEBF601526BF32A000ED357B /* SceneDelegate.swift in Sources */,
+				EEF68037275D9689003B673B /* ProtocolReminderDelegate.swift in Sources */,
 				EEBF602926BF3CE800ED357B /* ToDo.swift in Sources */,
 				EE2333E326C12DB100511349 /* ToDoCellTableViewCell.swift in Sources */,
 			);

@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNotificationCenterDelegate {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNotificationCenterDelegate, ReminderDelegate {
     
     typealias DataSource = CustomDataSource
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, ToDo>
@@ -40,7 +40,6 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
         configuringBarButtonItems()
         configureTableViewDataSource(tableView)
         tableViewDataSource.apply(todoSnapshot)
-
     }
     
     func configureTableViewDataSource(_ tableView: UITableView) {
@@ -79,7 +78,9 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
         if let todo = sourceViewController.todo {
             if let indexOfExistingTodo = todos.firstIndex(of: todo) {
                 todos[indexOfExistingTodo] = todo
-                
+                for notif in todoReminderManager.scheduledNotifications {
+                    print(notif.content.body)
+                }
             } else {
                 todos.append(todo)
             }
@@ -104,8 +105,24 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
         tableView.deselectRow(at: indexPath, animated: true)
         let detailController = ToDoDetailTableViewController(coder: coder)
         detailController?.todo = todos[indexPath.row]
+        if todoReminderManager.scheduledNotifications.contains(where: { request in
+            request.identifier == todos[indexPath.row].title
+        }) {
+            detailController?.shouldRemindSwitchBeenOn = true
+        } else {
+            detailController?.shouldRemindSwitchBeenOn = false }
         return detailController
     }
+    
+ /*   func isNotificationScheduled(todoTitle: String) -> Bool {
+        if todoReminderManager.scheduledNotifications.contains(where: { notification in
+            notification.identifier == todoTitle
+        }) {
+            return true
+        } else {
+            return false
+        }
+    } */
     
     func checkMarkTapped(sender: ToDoCellTableViewCell) {
         
@@ -113,6 +130,11 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
             var todo = todos[indexPath.row]
             todo.isComplete.toggle()
             todos[indexPath.row] = todo
+ //           todos[indexPath.row].shouldScheduleReminder?.toggle()
+            ToDo.saveToDos(todos)
+ //           for notifi in todoReminderManager.scheduledNotifications {
+ //               print(notifi.content.body)
+        //    }
             tableViewDataSource.apply(todoSnapshot, animatingDifferences: false, completion: nil)
         }
     }
