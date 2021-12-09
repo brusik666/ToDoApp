@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-class Reminder: NSObject, UNUserNotificationCenterDelegate {
+class ReminderManager: NSObject, UNUserNotificationCenterDelegate {
 
     
     
@@ -18,7 +18,6 @@ class Reminder: NSObject, UNUserNotificationCenterDelegate {
     let doneActionID = "done"
     let dismissActionID = "dismiss"
     
-    weak var delegate: ReminderDelegate?
     var scheduledNotifications: [UNNotificationRequest] {
         var scheduledNotifications: [UNNotificationRequest] = []
         
@@ -36,7 +35,7 @@ class Reminder: NSObject, UNUserNotificationCenterDelegate {
 
     private override init() {}
     
-    static let shared = Reminder()
+    static let shared = ReminderManager()
     
     private func authorizeIfNeeded(completion: @escaping (Bool) -> ()) {
         notificationCenter.getNotificationSettings { (settings) in

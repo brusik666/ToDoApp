@@ -9,28 +9,31 @@ import UIKit
 
 class ToDoDetailTableViewController: UITableViewController {
     
-    let todoReminderManager = Reminder.shared
+    let todoReminderManager = ReminderManager.shared
     
-    var isDatePickerHidden = true
+    private var isDatePickerHidden = true
     var shouldRemindSwitchBeenOn = false
-    var dateLabelIndexPath = IndexPath(row: 0, section: 1)
-    var datePickerIndexPath = IndexPath(row: 1, section: 1)
-    var notesIndexPath = IndexPath(row: 0, section: 2)
+    private var dateLabelIndexPath = IndexPath(row: 0, section: 1)
+    private var datePickerIndexPath = IndexPath(row: 1, section: 1)
+    private var notesIndexPath = IndexPath(row: 0, section: 2)
     var todo: ToDo?
     
     
-    @IBOutlet var isCompleteButton: UIButton!
-    @IBOutlet var titleTextField: UITextField!
-    @IBOutlet var dueDateLabel: UILabel!
-    @IBOutlet var dueDatePickerView: UIDatePicker!
-    @IBOutlet var notesTextView: UITextView!
-    @IBOutlet var saveButton: UIBarButtonItem!
+    @IBOutlet weak var isCompleteButton: UIButton!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var dueDatePickerView: UIDatePicker!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var remindMeSwitch: UISwitch!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        uppdateUI()
+    }
+    
+    func uppdateUI() {
         if let todo = todo {
             navigationItem.title = "To-Do"
             titleTextField.text = todo.title

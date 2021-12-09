@@ -18,11 +18,12 @@ class ToDoCellTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var shareButton: UIButton!
     
-    override func awakeFromNib() {
+   /* override func awakeFromNib() {
         super.awakeFromNib()
+        print("gggg")
         // Initialization code
     }
-
+*/
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

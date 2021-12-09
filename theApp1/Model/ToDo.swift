@@ -4,7 +4,6 @@ import UIKit
 
 struct ToDo: Equatable, Codable, Hashable {
 
-  //  let id: UUID
     var title: String
     var isComplete: Bool
     var dueDate: Date

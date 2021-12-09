@@ -8,27 +8,26 @@
 import UIKit
 import UserNotifications
 
-class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNotificationCenterDelegate, ReminderDelegate {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNotificationCenterDelegate{
     
-    typealias DataSource = CustomDataSource
+    typealias DataSource = ToDoTableViewDiffableDataSource
     typealias Snapshot = NSDiffableDataSourceSnapshot<String, ToDo>
     
-    let section = "1"
-    let todoReminderManager = Reminder.shared
+    private let section1 = "1"
+    private let todoReminderManager = ReminderManager.shared
     
     var todos = [ToDo]() {
         didSet {
             ToDo.saveToDos(todos)
         }
     }
-    var todoSnapshot: Snapshot {
+        var todoSnapshot: Snapshot {
         var snapshot = Snapshot()
-        snapshot.appendSections([section])
-        snapshot.appendItems(todos, toSection: section)
+        snapshot.appendSections([section1])
+        snapshot.appendItems(todos, toSection: section1)
         return snapshot
     }
     var tableViewDataSource: DataSource!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +41,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
         tableViewDataSource.apply(todoSnapshot)
     }
     
-    func configureTableViewDataSource(_ tableView: UITableView) {
+    private func configureTableViewDataSource(_ tableView: UITableView) {
         tableViewDataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, todo) -> UITableViewCell in
             let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! ToDoCellTableViewCell
             cell.delegate = self
@@ -53,7 +52,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
         })
     }
 
-    func configuringBarButtonItems() {
+    private func configuringBarButtonItems() {
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.rightBarButtonItem?.tintColor = .white
@@ -61,13 +60,8 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
             todos.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            
-        //} else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        //}
+            tableViewDataSource.apply(todoSnapshot)
         }
     }
     
@@ -114,27 +108,12 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
         return detailController
     }
     
- /*   func isNotificationScheduled(todoTitle: String) -> Bool {
-        if todoReminderManager.scheduledNotifications.contains(where: { notification in
-            notification.identifier == todoTitle
-        }) {
-            return true
-        } else {
-            return false
-        }
-    } */
-    
     func checkMarkTapped(sender: ToDoCellTableViewCell) {
         
         if let indexPath = tableView.indexPath(for: sender) {
             var todo = todos[indexPath.row]
             todo.isComplete.toggle()
             todos[indexPath.row] = todo
- //           todos[indexPath.row].shouldScheduleReminder?.toggle()
-            ToDo.saveToDos(todos)
- //           for notifi in todoReminderManager.scheduledNotifications {
- //               print(notifi.content.body)
-        //    }
             tableViewDataSource.apply(todoSnapshot, animatingDifferences: false, completion: nil)
         }
     }
@@ -147,5 +126,4 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
             present(activityController, animated: true, completion: nil)
         }
     }
-    
 }
