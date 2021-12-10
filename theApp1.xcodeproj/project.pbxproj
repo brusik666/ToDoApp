@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE15E86C2758F4270016A941 /* DiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE15E86B2758F4270016A941 /* DiffableDataSource.swift */; };
 		EE2333E326C12DB100511349 /* ToDoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */; };
-		EE29BAF02757A7F2000B7A1F /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29BAEF2757A7F2000B7A1F /* ReminderManager.swift */; };
+		EE29BAF02757A7F2000B7A1F /* ToDoReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */; };
 		EE39F23726C0369F005FF229 /* ToDoDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */; };
 		EEBF601326BF32A000ED357B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF601226BF32A000ED357B /* AppDelegate.swift */; };
 		EEBF601526BF32A000ED357B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF601426BF32A000ED357B /* SceneDelegate.swift */; };
@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		EE15E86B2758F4270016A941 /* DiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDataSource.swift; sourceTree = "<group>"; };
 		EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCellTableViewCell.swift; sourceTree = "<group>"; };
-		EE29BAEF2757A7F2000B7A1F /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
+		EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoReminderManager.swift; sourceTree = "<group>"; };
 		EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailTableViewController.swift; sourceTree = "<group>"; };
 		EEBF600F26BF32A000ED357B /* theApp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theApp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBF601226BF32A000ED357B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 			children = (
 				EEBF602826BF3CE800ED357B /* ToDo.swift */,
 				EEDEA21B275FE3EC001F4769 /* ToDoManager.swift */,
+				EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */,
 				EEDEA219275FDF92001F4769 /* Sections.swift */,
-				EE29BAEF2757A7F2000B7A1F /* ReminderManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			files = (
 				EEDEA21C275FE3EC001F4769 /* ToDoManager.swift in Sources */,
 				EEBF601326BF32A000ED357B /* AppDelegate.swift in Sources */,
-				EE29BAF02757A7F2000B7A1F /* ReminderManager.swift in Sources */,
+				EE29BAF02757A7F2000B7A1F /* ToDoReminderManager.swift in Sources */,
 				EE39F23726C0369F005FF229 /* ToDoDetailTableViewController.swift in Sources */,
 				EE15E86C2758F4270016A941 /* DiffableDataSource.swift in Sources */,
 				EEBF602B26BF4EDF00ED357B /* ToDoTableViewController.swift in Sources */,

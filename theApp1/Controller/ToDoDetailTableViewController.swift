@@ -12,7 +12,6 @@ class ToDoDetailTableViewController: UITableViewController {
     let todoReminderManager = ReminderManager.shared
     
     private var isDatePickerHidden = true
-    var shouldRemindSwitchBeenOn = false
     private var dateLabelIndexPath = IndexPath(row: 0, section: 1)
     private var datePickerIndexPath = IndexPath(row: 1, section: 1)
     private var notesIndexPath = IndexPath(row: 0, section: 2)
@@ -40,10 +39,15 @@ class ToDoDetailTableViewController: UITableViewController {
             dueDatePickerView.date = todo.dueDate
             isCompleteButton.isSelected = todo.isComplete
             notesTextView.text = todo.notes
+            if todoReminderManager.scheduledNotifications.contains(where: { request in
+                request.identifier == todo.title
+            }) {
+                remindMeSwitch.isOn = true
+            } 
         } else {
             dueDatePickerView.date = Date().addingTimeInterval(24*60*60)
         }
-        remindMeSwitch.isOn = shouldRemindSwitchBeenOn
+        
         updateSaveButtonState()
         updateDueDateLabel(date: dueDatePickerView.date)
     }
@@ -71,7 +75,7 @@ class ToDoDetailTableViewController: UITableViewController {
         updateSaveButtonState()
     }
     
-  /*  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch  indexPath {
         case datePickerIndexPath where isDatePickerHidden == true :
             return 0
@@ -80,7 +84,7 @@ class ToDoDetailTableViewController: UITableViewController {
         default:
             return UITableView.automaticDimension
         }
-    }*/
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == dateLabelIndexPath {

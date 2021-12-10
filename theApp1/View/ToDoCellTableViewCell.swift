@@ -18,16 +18,9 @@ class ToDoCellTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var shareButton: UIButton!
     
-   /* override func awakeFromNib() {
-        super.awakeFromNib()
-        print("gggg")
-        // Initialization code
-    }
-*/
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
     @IBAction func completeButtonTapped(_ sender: UIButton) {
