@@ -2,8 +2,8 @@ import Foundation
 import UserNotifications
 import UIKit
 
-struct ToDo: Equatable, Codable, Hashable {
-
+struct ToDo: Equatable, Comparable, Codable, Hashable {
+   
     var title: String
     var isComplete: Bool
     var dueDate: Date
@@ -18,7 +18,11 @@ struct ToDo: Equatable, Codable, Hashable {
 
     
     static func ==(lhs: ToDo, rhs: ToDo) -> Bool {
-        return lhs.title == rhs.title
+        return lhs.title == rhs.title && lhs.hashValue == rhs.hashValue
+    }
+    
+    static func < (lhs: ToDo, rhs: ToDo) -> Bool {
+        return lhs.dueDate < rhs.dueDate
     }
 }
 

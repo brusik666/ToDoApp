@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum Section {
+enum Section: CaseIterable, Hashable {
     case uncompleteToDo, completeToDo
     
-    var title: String {
+    var title: String? {
         switch self {
-        case .uncompleteToDo: return "To Do"
+        case .uncompleteToDo: return nil
         case .completeToDo: return "Complete"
         }
     }

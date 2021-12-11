@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE15E86C2758F4270016A941 /* DiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE15E86B2758F4270016A941 /* DiffableDataSource.swift */; };
+		EE20E6082764203900657043 /* TableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE20E6072764203900657043 /* TableViewSectionHeader.swift */; };
 		EE2333E326C12DB100511349 /* ToDoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */; };
 		EE29BAF02757A7F2000B7A1F /* ToDoReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */; };
 		EE39F23726C0369F005FF229 /* ToDoDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */; };
@@ -19,11 +20,12 @@
 		EEBF602926BF3CE800ED357B /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF602826BF3CE800ED357B /* ToDo.swift */; };
 		EEBF602B26BF4EDF00ED357B /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF602A26BF4EDF00ED357B /* ToDoTableViewController.swift */; };
 		EEDEA21A275FDF92001F4769 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDEA219275FDF92001F4769 /* Sections.swift */; };
-		EEDEA21C275FE3EC001F4769 /* ToDoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDEA21B275FE3EC001F4769 /* ToDoManager.swift */; };
+		EEDEA21C275FE3EC001F4769 /* ToDoDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDEA21B275FE3EC001F4769 /* ToDoDataBase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EE15E86B2758F4270016A941 /* DiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDataSource.swift; sourceTree = "<group>"; };
+		EE20E6072764203900657043 /* TableViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeader.swift; sourceTree = "<group>"; };
 		EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCellTableViewCell.swift; sourceTree = "<group>"; };
 		EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoReminderManager.swift; sourceTree = "<group>"; };
 		EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +39,7 @@
 		EEBF602826BF3CE800ED357B /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		EEBF602A26BF4EDF00ED357B /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
 		EEDEA219275FDF92001F4769 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
-		EEDEA21B275FE3EC001F4769 /* ToDoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoManager.swift; sourceTree = "<group>"; };
+		EEDEA21B275FE3EC001F4769 /* ToDoDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDataBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				EEBF602826BF3CE800ED357B /* ToDo.swift */,
-				EEDEA21B275FE3EC001F4769 /* ToDoManager.swift */,
+				EEDEA21B275FE3EC001F4769 /* ToDoDataBase.swift */,
 				EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */,
 				EEDEA219275FDF92001F4769 /* Sections.swift */,
 			);
@@ -85,6 +87,7 @@
 				EEBF601826BF32A000ED357B /* Main.storyboard */,
 				EEBF601D26BF32A100ED357B /* LaunchScreen.storyboard */,
 				EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */,
+				EE20E6072764203900657043 /* TableViewSectionHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,7 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEDEA21C275FE3EC001F4769 /* ToDoManager.swift in Sources */,
+				EEDEA21C275FE3EC001F4769 /* ToDoDataBase.swift in Sources */,
 				EEBF601326BF32A000ED357B /* AppDelegate.swift in Sources */,
 				EE29BAF02757A7F2000B7A1F /* ToDoReminderManager.swift in Sources */,
 				EE39F23726C0369F005FF229 /* ToDoDetailTableViewController.swift in Sources */,
@@ -207,6 +210,7 @@
 				EEDEA21A275FDF92001F4769 /* Sections.swift in Sources */,
 				EEBF601526BF32A000ED357B /* SceneDelegate.swift in Sources */,
 				EEBF602926BF3CE800ED357B /* ToDo.swift in Sources */,
+				EE20E6082764203900657043 /* TableViewSectionHeader.swift in Sources */,
 				EE2333E326C12DB100511349 /* ToDoCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
