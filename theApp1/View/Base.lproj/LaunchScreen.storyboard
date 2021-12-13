@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="jrK-AE-cqe">
+            <objects>
+                <viewController id="1Wx-RT-2OZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gCh-0a-GCj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1 2" translatesAutoresizingMaskIntoConstraints="NO" id="QHs-FI-xg4">
+                                <rect key="frame" x="20" y="260.5" width="374" height="375"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUP-Cw-3T3">
+                                <rect key="frame" x="182.5" y="44" width="49" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ze9-jR-oCc">
+                                <rect key="frame" x="193" y="821" width="28.5" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3WC-6G-V8k"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.91400000000000003" green="0.68300000000000005" blue="0.51500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ze9-jR-oCc" firstAttribute="centerX" secondItem="gCh-0a-GCj" secondAttribute="centerX" id="3h9-m7-dar"/>
+                            <constraint firstItem="HUP-Cw-3T3" firstAttribute="centerX" secondItem="gCh-0a-GCj" secondAttribute="centerX" id="GUX-sD-Ldy"/>
+                            <constraint firstItem="QHs-FI-xg4" firstAttribute="height" secondItem="gCh-0a-GCj" secondAttribute="height" multiplier="0.418527" id="JoL-ct-W6p"/>
+                            <constraint firstItem="Ze9-jR-oCc" firstAttribute="bottom" secondItem="3WC-6G-V8k" secondAttribute="bottom" id="Kcx-ps-NBz"/>
+                            <constraint firstItem="QHs-FI-xg4" firstAttribute="leading" secondItem="3WC-6G-V8k" secondAttribute="leading" constant="20" id="iVg-Kz-67l"/>
+                            <constraint firstItem="HUP-Cw-3T3" firstAttribute="top" secondItem="3WC-6G-V8k" secondAttribute="top" id="jYm-DQ-kDt"/>
+                            <constraint firstItem="QHs-FI-xg4" firstAttribute="centerX" secondItem="gCh-0a-GCj" secondAttribute="centerX" id="r62-NR-VAW"/>
+                            <constraint firstItem="3WC-6G-V8k" firstAttribute="trailing" secondItem="QHs-FI-xg4" secondAttribute="trailing" constant="20" id="r9c-KS-AaT"/>
+                            <constraint firstItem="QHs-FI-xg4" firstAttribute="centerY" secondItem="gCh-0a-GCj" secondAttribute="centerY" id="zGm-UG-fY8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doLabel" destination="HUP-Cw-3T3" id="2kB-RQ-rVS"/>
+                        <outlet property="itLabel" destination="Ze9-jR-oCc" id="9kh-za-tra"/>
+                        <outlet property="launchImageView" destination="QHs-FI-xg4" id="LS3-f3-NMM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="amf-zn-7Ww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1500.0000000000002" y="126.5625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1 2" width="500" height="500"/>
+    </resources>
+</document>

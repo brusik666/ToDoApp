@@ -7,30 +7,41 @@
 
 import UIKit
 
-class ToDoDetailTableViewController: UITableViewController {
+class ToDoDetailTableViewController: UITableViewController, RemindManagerAvailable {
     
-    var isDatePickerHidden = true
-    var dateLabelIndexPath = IndexPath(row: 0, section: 1)
-    var datePickerIndexPath = IndexPath(row: 1, section: 1)
-    var notesIndexPath = IndexPath(row: 0, section: 2)
+    private var isDatePickerHidden = true
+    private var dateLabelIndexPath = IndexPath(row: 0, section: 1)
+    private var datePickerIndexPath = IndexPath(row: 1, section: 1)
+    private var notesIndexPath = IndexPath(row: 0, section: 2)
     var todo: ToDo?
     
-    @IBOutlet var isCompleteButton: UIButton!
-    @IBOutlet var titleTextField: UITextField!
-    @IBOutlet var dueDateLabel: UILabel!
-    @IBOutlet var dueDatePickerView: UIDatePicker!
-    @IBOutlet var notesTextView: UITextView!
-    @IBOutlet var saveButton: UIBarButtonItem!
     
+    @IBOutlet weak var isCompleteButton: UIButton!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var dueDatePickerView: UIDatePicker!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var remindMeSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        uppdateUI()
+    }
+    
+    func uppdateUI() {
         if let todo = todo {
             navigationItem.title = "To-Do"
             titleTextField.text = todo.title
             dueDatePickerView.date = todo.dueDate
             isCompleteButton.isSelected = todo.isComplete
             notesTextView.text = todo.notes
+            if remindManager!.scheduledNotifications.contains(where: { request in
+                request.identifier == todo.title
+            }) {
+                remindMeSwitch.isOn = true
+            } 
         } else {
             dueDatePickerView.date = Date().addingTimeInterval(24*60*60)
         }
@@ -38,7 +49,7 @@ class ToDoDetailTableViewController: UITableViewController {
         updateSaveButtonState()
         updateDueDateLabel(date: dueDatePickerView.date)
     }
-
+    
     func updateSaveButtonState() {
         let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
         saveButton.isEnabled = shouldEnableSaveButton
@@ -54,11 +65,12 @@ class ToDoDetailTableViewController: UITableViewController {
     @IBAction func returnPressed(_ sender: UITextField) {
         sender.resignFirstResponder()
     }
-    @IBAction func isCompleteButtonTapped(_ sender: UIButton) {
+    @IBAction func isCompleteButtonT(_ sender: UIButton) {
         isCompleteButton.isSelected.toggle()
     }
     @IBAction func datePickerCHanged(_ sender: UIDatePicker) {
         updateDueDateLabel(date: sender.date)
+        updateSaveButtonState()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,10 +92,12 @@ class ToDoDetailTableViewController: UITableViewController {
             tableView.beginUpdates()
             tableView.endUpdates()
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: segue)
+        super.prepare(for: segue, sender: sender)
         
         guard segue.identifier == "saveUnwind" else {return}
         
@@ -91,54 +105,18 @@ class ToDoDetailTableViewController: UITableViewController {
         let isComplete = isCompleteButton.isSelected
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text
+        
         todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
         
+        guard remindMeSwitch.isOn else {
+            remindManager!.unschedule(todoWithIdentifier: title)
+            return
+        }
+        remindManager!.schedule(todoWithIdentifier: title, triggeringDate: dueDate) { authorizationPermissionGranted in
+            if !authorizationPermissionGranted {
+                let todoTableViewController = segue.destination as! ToDoTableViewController
+                todoTableViewController.presentNeedAuthorizationAlert()
+            }
+        }
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
