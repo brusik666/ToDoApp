@@ -8,9 +8,7 @@
 import Foundation
 import UserNotifications
 
-class ReminderManager: NSObject, UNUserNotificationCenterDelegate {
-
-    
+class ReminderManager: NSObject {
     
     let notificationCenter = UNUserNotificationCenter.current()
     let notificationCategoryId = "ToDoNotification"
@@ -32,10 +30,6 @@ class ReminderManager: NSObject, UNUserNotificationCenterDelegate {
         group.wait()
         return scheduledNotifications
     }
-
-    private override init() {}
-    
-    static let shared = ReminderManager()
     
     private func authorizeIfNeeded(completion: @escaping (Bool) -> ()) {
         notificationCenter.getNotificationSettings { (settings) in
@@ -56,7 +50,6 @@ class ReminderManager: NSObject, UNUserNotificationCenterDelegate {
     }
     
     func schedule(todoWithIdentifier todoTitle: String, triggeringDate todoDueDate: Date, completion: @escaping (Bool) -> ()) {
-        notificationCenter.delegate = self
         authorizeIfNeeded { (granted) in
             guard granted else {
                 DispatchQueue.main.async {
@@ -66,7 +59,7 @@ class ReminderManager: NSObject, UNUserNotificationCenterDelegate {
             }
             let content = UNMutableNotificationContent()
             content.title = "Reminder"
-            content.body = "\(todoTitle) in 24 hours."
+            content.body = todoTitle
             content.sound = UNNotificationSound.default
             content.categoryIdentifier = self.notificationCategoryId
             
@@ -88,7 +81,7 @@ class ReminderManager: NSObject, UNUserNotificationCenterDelegate {
 
             let remindTomorrowAction = UNNotificationAction(identifier: self.remindActionID, title: "Remind Tomorrow", options: [])
             let todoIsDoneAction = UNNotificationAction(identifier: self.doneActionID, title: "Already Done", options: [])
-            let dismissRemindAction = UNNotificationAction(identifier: self.dismissActionID, title: "Dismiss Reminder", options: [])
+            let dismissRemindAction = UNNotificationAction(identifier: self.dismissActionID, title: "Dismiss Reminder", options: [.foreground])
             
             let todoCategory = UNNotificationCategory(identifier: self.notificationCategoryId, actions: [remindTomorrowAction, todoIsDoneAction, dismissRemindAction], intentIdentifiers: [], options: [])
             

@@ -10,9 +10,9 @@ import Foundation
 enum Section: CaseIterable, Hashable {
     case uncompleteToDo, completeToDo
     
-    var title: String? {
+    var title: String {
         switch self {
-        case .uncompleteToDo: return nil
+        case .uncompleteToDo: return "Uncomplete"
         case .completeToDo: return "Complete"
         }
     }

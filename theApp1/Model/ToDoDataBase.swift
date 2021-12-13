@@ -13,8 +13,8 @@ class ToDoDataBase {
     
     var existingTodos: [ToDo] {
         get {
-            if var savedTodos = loadToDos() {
-                savedTodos.sort {$0.dueDate < $1.dueDate}
+            if let savedTodos = loadToDos() {
+              //  savedTodos.sort {$0.dueDate < $1.dueDate}
                 return savedTodos
             } else {
                 return loadSampleTodos()

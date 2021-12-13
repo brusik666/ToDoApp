@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6AC-s9-ytn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FCp-DF-X7v">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -316,10 +317,52 @@
             </objects>
             <point key="canvasLocation" x="874" y="127"/>
         </scene>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="b88-wK-0Na">
+            <objects>
+                <viewController id="FCp-DF-X7v" customClass="LaunchScreenViewController" customModule="theApp1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iKB-fe-Qk8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1 2" translatesAutoresizingMaskIntoConstraints="NO" id="XYy-yO-pIe">
+                                <rect key="frame" x="20" y="336" width="374" height="224"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSg-o0-MEp">
+                                <rect key="frame" x="182.5" y="754" width="49" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jbs-Qc-L11"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.91400000000000003" green="0.68300000000000005" blue="0.51500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XYy-yO-pIe" firstAttribute="leading" secondItem="jbs-Qc-L11" secondAttribute="leading" constant="20" id="Ll6-Ta-HVq"/>
+                            <constraint firstItem="XYy-yO-pIe" firstAttribute="centerX" secondItem="iKB-fe-Qk8" secondAttribute="centerX" id="URD-hW-s4w"/>
+                            <constraint firstItem="XYy-yO-pIe" firstAttribute="height" secondItem="iKB-fe-Qk8" secondAttribute="height" multiplier="0.25" id="Zh4-UW-mgv"/>
+                            <constraint firstItem="XYy-yO-pIe" firstAttribute="centerY" secondItem="iKB-fe-Qk8" secondAttribute="centerY" id="oTP-Ef-dFL"/>
+                            <constraint firstItem="BSg-o0-MEp" firstAttribute="centerX" secondItem="iKB-fe-Qk8" secondAttribute="centerX" id="pLP-eC-dH6"/>
+                            <constraint firstItem="jbs-Qc-L11" firstAttribute="trailing" secondItem="XYy-yO-pIe" secondAttribute="trailing" constant="20" id="tKZ-DO-b93"/>
+                            <constraint firstItem="jbs-Qc-L11" firstAttribute="bottom" secondItem="BSg-o0-MEp" secondAttribute="bottom" constant="67" id="x88-fy-ql4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doLabel" destination="BSg-o0-MEp" id="enl-rc-ter"/>
+                        <outlet property="launchImageView" destination="XYy-yO-pIe" id="SSg-rv-phT"/>
+                        <segue destination="6AC-s9-ytn" kind="presentation" identifier="todoTableViewController" modalPresentationStyle="overFullScreen" id="eJl-04-wxC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0p7-rD-wuh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1500.0000000000002" y="126.5625"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="8YY-fb-Ypb">
             <objects>
                 <navigationController id="6AC-s9-ytn" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="hpB-2l-Opr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" largeTitles="YES" id="Gd7-Zg-9Fg">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -340,6 +383,7 @@
         <segue reference="HaB-zq-4vm"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="1 2" width="500" height="500"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>

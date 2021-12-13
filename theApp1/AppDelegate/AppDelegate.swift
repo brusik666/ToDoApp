@@ -3,12 +3,57 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        return true
+    lazy var dataBase = ToDoDataBase()
+    lazy var remindManager = ReminderManager()
+    
+ /*   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .banner, .list])
+    }
+        
+  */
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let title = response.notification.request.content.body
+        var existingTodo: ToDo!
+        var indexOfExistingTodo: Int!
+        
+        for todo in dataBase.existingTodos {
+            guard todo.title == title else { continue }
+            existingTodo = todo
+        }
+        
+        indexOfExistingTodo = dataBase.existingTodos.firstIndex(of: existingTodo)
+        
+        
+        switch response.actionIdentifier {
+        case remindManager.doneActionID:
+            existingTodo.isComplete = true
+            print("done")
+        case remindManager.dismissActionID:
+            remindManager.unschedule(todoWithIdentifier: title)
+        case remindManager.remindActionID:
+            let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.minute, .hour, .day, .month], from: Date().addingTimeInterval(60)), repeats: false)
+            let request = UNNotificationRequest(identifier: existingTodo.title, content: response.notification.request.content, trigger: trigger)
+            remindManager.notificationCenter.add(request) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        default: break
+        }
+        
+        dataBase.existingTodos[indexOfExistingTodo] = existingTodo
     }
 
-     
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        remindManager.notificationCenter.delegate = self
+        return true
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .banner, .list])
+    }
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

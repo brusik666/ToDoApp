@@ -7,9 +7,7 @@
 
 import UIKit
 
-class ToDoDetailTableViewController: UITableViewController {
-    
-    let todoReminderManager = ReminderManager.shared
+class ToDoDetailTableViewController: UITableViewController, RemindManagerAvailable {
     
     private var isDatePickerHidden = true
     private var dateLabelIndexPath = IndexPath(row: 0, section: 1)
@@ -39,7 +37,7 @@ class ToDoDetailTableViewController: UITableViewController {
             dueDatePickerView.date = todo.dueDate
             isCompleteButton.isSelected = todo.isComplete
             notesTextView.text = todo.notes
-            if todoReminderManager.scheduledNotifications.contains(where: { request in
+            if remindManager!.scheduledNotifications.contains(where: { request in
                 request.identifier == todo.title
             }) {
                 remindMeSwitch.isOn = true
@@ -111,10 +109,10 @@ class ToDoDetailTableViewController: UITableViewController {
         todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
         
         guard remindMeSwitch.isOn else {
-            todoReminderManager.unschedule(todoWithIdentifier: title)
+            remindManager!.unschedule(todoWithIdentifier: title)
             return
         }
-        todoReminderManager.schedule(todoWithIdentifier: title, triggeringDate: dueDate) { authorizationPermissionGranted in
+        remindManager!.schedule(todoWithIdentifier: title, triggeringDate: dueDate) { authorizationPermissionGranted in
             if !authorizationPermissionGranted {
                 let todoTableViewController = segue.destination as! ToDoTableViewController
                 todoTableViewController.presentNeedAuthorizationAlert()

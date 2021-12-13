@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		EE15E86C2758F4270016A941 /* DiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE15E86B2758F4270016A941 /* DiffableDataSource.swift */; };
 		EE20E6082764203900657043 /* TableViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE20E6072764203900657043 /* TableViewSectionHeader.swift */; };
+		EE22A3A927657B53003729C2 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE22A3A827657B53003729C2 /* LaunchScreenViewController.swift */; };
+		EE22A3AB27657F9D003729C2 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE22A3AA27657F9D003729C2 /* ExtensionUIColor.swift */; };
 		EE2333E326C12DB100511349 /* ToDoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */; };
 		EE29BAF02757A7F2000B7A1F /* ToDoReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */; };
 		EE39F23726C0369F005FF229 /* ToDoDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */; };
+		EE74FE5527676975005D136A /* ProtocolDatabaseManagerAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74FE5427676975005D136A /* ProtocolDatabaseManagerAvailable.swift */; };
+		EE74FE5727676C52005D136A /* ProtocolRemindManagerAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */; };
 		EEBF601326BF32A000ED357B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF601226BF32A000ED357B /* AppDelegate.swift */; };
 		EEBF601526BF32A000ED357B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBF601426BF32A000ED357B /* SceneDelegate.swift */; };
 		EEBF601A26BF32A000ED357B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBF601826BF32A000ED357B /* Main.storyboard */; };
@@ -26,9 +30,13 @@
 /* Begin PBXFileReference section */
 		EE15E86B2758F4270016A941 /* DiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableDataSource.swift; sourceTree = "<group>"; };
 		EE20E6072764203900657043 /* TableViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeader.swift; sourceTree = "<group>"; };
+		EE22A3A827657B53003729C2 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		EE22A3AA27657F9D003729C2 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCellTableViewCell.swift; sourceTree = "<group>"; };
 		EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoReminderManager.swift; sourceTree = "<group>"; };
 		EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailTableViewController.swift; sourceTree = "<group>"; };
+		EE74FE5427676975005D136A /* ProtocolDatabaseManagerAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDatabaseManagerAvailable.swift; sourceTree = "<group>"; };
+		EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRemindManagerAvailable.swift; sourceTree = "<group>"; };
 		EEBF600F26BF32A000ED357B /* theApp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theApp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBF601226BF32A000ED357B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBF601426BF32A000ED357B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				EEBF601226BF32A000ED357B /* AppDelegate.swift */,
+				EE74FE5427676975005D136A /* ProtocolDatabaseManagerAvailable.swift */,
 				EEBF601426BF32A000ED357B /* SceneDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -88,6 +97,7 @@
 				EEBF601D26BF32A100ED357B /* LaunchScreen.storyboard */,
 				EE2333E226C12DB100511349 /* ToDoCellTableViewCell.swift */,
 				EE20E6072764203900657043 /* TableViewSectionHeader.swift */,
+				EE22A3AA27657F9D003729C2 /* ExtensionUIColor.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -95,6 +105,7 @@
 		EEA699322761953A0093792D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EE22A3A827657B53003729C2 /* LaunchScreenViewController.swift */,
 				EEBF602A26BF4EDF00ED357B /* ToDoTableViewController.swift */,
 				EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */,
 				EE15E86B2758F4270016A941 /* DiffableDataSource.swift */,
@@ -105,6 +116,7 @@
 		EEBF600626BF32A000ED357B = {
 			isa = PBXGroup;
 			children = (
+				EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */,
 				EEBF601126BF32A000ED357B /* theApp1 */,
 				EEBF601026BF32A000ED357B /* Products */,
 			);
@@ -205,13 +217,17 @@
 				EEBF601326BF32A000ED357B /* AppDelegate.swift in Sources */,
 				EE29BAF02757A7F2000B7A1F /* ToDoReminderManager.swift in Sources */,
 				EE39F23726C0369F005FF229 /* ToDoDetailTableViewController.swift in Sources */,
+				EE74FE5727676C52005D136A /* ProtocolRemindManagerAvailable.swift in Sources */,
 				EE15E86C2758F4270016A941 /* DiffableDataSource.swift in Sources */,
 				EEBF602B26BF4EDF00ED357B /* ToDoTableViewController.swift in Sources */,
+				EE74FE5527676975005D136A /* ProtocolDatabaseManagerAvailable.swift in Sources */,
 				EEDEA21A275FDF92001F4769 /* Sections.swift in Sources */,
 				EEBF601526BF32A000ED357B /* SceneDelegate.swift in Sources */,
 				EEBF602926BF3CE800ED357B /* ToDo.swift in Sources */,
 				EE20E6082764203900657043 /* TableViewSectionHeader.swift in Sources */,
+				EE22A3A927657B53003729C2 /* LaunchScreenViewController.swift in Sources */,
 				EE2333E326C12DB100511349 /* ToDoCellTableViewCell.swift in Sources */,
+				EE22A3AB27657F9D003729C2 /* ExtensionUIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
