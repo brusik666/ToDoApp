@@ -18,7 +18,11 @@ struct ToDo: Equatable, Comparable, Codable, Hashable {
 
     
     static func ==(lhs: ToDo, rhs: ToDo) -> Bool {
-        return lhs.hashValue == rhs.hashValue || rhs.title == lhs.title
+        return rhs.hashValue == lhs.hashValue
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
     }
     
     static func < (lhs: ToDo, rhs: ToDo) -> Bool {

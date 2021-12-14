@@ -73,7 +73,7 @@ class ToDoDetailTableViewController: UITableViewController, RemindManagerAvailab
         updateSaveButtonState()
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  /*  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch  indexPath {
         case datePickerIndexPath where isDatePickerHidden == true :
             return 0
@@ -82,7 +82,7 @@ class ToDoDetailTableViewController: UITableViewController, RemindManagerAvailab
         default:
             return UITableView.automaticDimension
         }
-    }
+    } */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath == dateLabelIndexPath {

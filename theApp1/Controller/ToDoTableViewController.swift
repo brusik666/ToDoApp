@@ -93,7 +93,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
                 dataBase!.addToDo(todo: todo)
             }
         }
-        tableViewDataSource.apply(todoSnapshot, animatingDifferences: false, completion: nil)
+        tableViewDataSource.apply(todoSnapshot, animatingDifferences: true, completion: nil)
     }
     
     func presentNeedAuthorizationAlert() {
@@ -117,15 +117,16 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
     }
     
     func checkMarkTapped(sender: ToDoCellTableViewCell) {
-        guard let indexPath = tableView.indexPath(for: sender) else { return }
-        let todo = dataBase!.existingTodosByCompletion[indexPath.section][indexPath.row]
-        if let index = dataBase!.existingTodos.firstIndex(of: todo) {
-            dataBase!.existingTodos[index].isComplete.toggle()
+        guard let indexPath = tableView.indexPath(for: sender),
+              let todo = dataBase?.existingTodosByCompletion[indexPath.section][indexPath.row] else { return }
+        
+        if let index = dataBase?.existingTodos.firstIndex(of: todo) {
+            dataBase?.existingTodos[index].isComplete.toggle()
+        }
+        tableViewDataSource.apply(todoSnapshot, animatingDifferences: true) {
+            self.tableView.reloadData()
         }
         
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
-            self.tableViewDataSource.apply(self.todoSnapshot, animatingDifferences: true, completion: nil)
-        }
     }
     func shareButtonTapped(sender: ToDoCellTableViewCell) {
         if let indexPath = tableView.indexPath(for: sender) {
