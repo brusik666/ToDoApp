@@ -74,6 +74,7 @@
 			children = (
 				EEBF601226BF32A000ED357B /* AppDelegate.swift */,
 				EE74FE5427676975005D136A /* ProtocolDatabaseManagerAvailable.swift */,
+				EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */,
 				EEBF601426BF32A000ED357B /* SceneDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -116,7 +117,6 @@
 		EEBF600626BF32A000ED357B = {
 			isa = PBXGroup;
 			children = (
-				EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */,
 				EEBF601126BF32A000ED357B /* theApp1 */,
 				EEBF601026BF32A000ED357B /* Products */,
 			);

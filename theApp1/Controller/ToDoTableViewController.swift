@@ -93,7 +93,9 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
                 dataBase!.addToDo(todo: todo)
             }
         }
-        tableViewDataSource.apply(todoSnapshot, animatingDifferences: true, completion: nil)
+        tableViewDataSource.apply(todoSnapshot, animatingDifferences: true) {
+            self.tableView.reloadData()
+        }
     }
     
     func presentNeedAuthorizationAlert() {
