@@ -3,6 +3,7 @@ This is a simple notes app with several features for iOS users.
 
 # Features
 - Two screens in: a list of all your "ToDos" and detail(creational) screen.
+- Sample "ToDos" available.
 - Two sections of notes divided by completion: "complete" and "incomplete".
 If your "ToDo" has already been complete, tap checkmark button and it will move from "incomplete" to "complete" section and vice versa.
 - Create your "ToDo" from scratch with title, optional notes and due date.
