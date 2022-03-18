@@ -12,14 +12,14 @@ If your "ToDo" has already been complete, tap checkmark button and it will move 
 - There are three options for handling push notification if you touch deeply inside notification:
 1) "Remind me later" postpones a reminder for 1 hour.
 2) "Already done" marks your "ToDo" as complete.
-3) "Dismiss" just make nothing xD.
+3) "Dismiss".
 
 # Used stack of technologies
 - MVC
 - UIKit(TableViews)
 - Diffable Data Source
 - Push notifications(UNUserNotificationCenter)
-- Data persistance
+- Data persistence
 - Protocols
 
 
