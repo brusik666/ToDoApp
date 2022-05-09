@@ -15,11 +15,14 @@ If your "ToDo" has already been complete, tap checkmark button and it will move 
 3) "Dismiss".
 
 # Used stack of technologies
+- Swift
+- Foundation
 - MVC
 - UIKit(TableViews)
 - Diffable Data Source
-- Push notifications(UNUserNotificationCenter)
+- Local push notifications(UNUserNotificationCenter)
 - Data persistence
-- Protocols
+
+
 
 
