@@ -14,6 +14,5 @@ class ToDoTableViewDiffableDataSource: UITableViewDiffableDataSource<Section, To
         return true
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        print("h")
     }
 }

@@ -48,19 +48,19 @@ class ToDoDataBase {
         existingTodos.remove(at: index)
     }
 
-    func loadToDos() -> [ToDo]? {
+    private func loadToDos() -> [ToDo]? {
         guard let codedToDos = try? Data(contentsOf: ToDoDataBase.archiveURL) else {return nil}
         let propertyListDecoder = PropertyListDecoder()
         return try? propertyListDecoder.decode(Array<ToDo>.self, from: codedToDos)
     }
      
-    func saveToDos(_ todos: [ToDo]) {
+    private func saveToDos(_ todos: [ToDo]) {
         let propertyListEncoder = PropertyListEncoder()
         let codedToDos = try? propertyListEncoder.encode(todos)
         try? codedToDos?.write(to: ToDoDataBase.archiveURL, options: .noFileProtection)
     }
     
-    func loadSampleTodos() -> [ToDo] {
+    private func loadSampleTodos() -> [ToDo] {
         let todo1 = ToDo(title: "Feed my cats", isComplete: false, dueDate: Date(), notes: nil)
         let todo2 = ToDo(title: "Play with Johny", isComplete: false, dueDate: Date(), notes: "Make a cartrack and then play Lego")
         let todo3 = ToDo(title: "NovaPoshta", isComplete: true, dueDate: Date(), notes: "Get a fragile from shops")

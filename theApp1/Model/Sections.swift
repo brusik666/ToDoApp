@@ -12,7 +12,7 @@ enum Section: CaseIterable, Hashable {
     
     var title: String {
         switch self {
-        case .uncompleteToDo: return "Uncomplete"
+        case .uncompleteToDo: return "Incomplete"
         case .completeToDo: return "Complete"
         }
     }

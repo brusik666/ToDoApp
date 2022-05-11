@@ -61,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE05E68F282BD5FA000F0D45 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				EE74FE5427676975005D136A /* ProtocolDatabaseManagerAvailable.swift */,
+				EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		EE27D3B227619B4400A46116 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,8 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				EEBF601226BF32A000ED357B /* AppDelegate.swift */,
-				EE74FE5427676975005D136A /* ProtocolDatabaseManagerAvailable.swift */,
-				EE74FE5627676C52005D136A /* ProtocolRemindManagerAvailable.swift */,
 				EEBF601426BF32A000ED357B /* SceneDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -87,6 +94,7 @@
 				EEDEA21B275FE3EC001F4769 /* ToDoDataBase.swift */,
 				EE29BAEF2757A7F2000B7A1F /* ToDoReminderManager.swift */,
 				EEDEA219275FDF92001F4769 /* Sections.swift */,
+				EE15E86B2758F4270016A941 /* DiffableDataSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,7 +117,6 @@
 				EE22A3A827657B53003729C2 /* LaunchScreenViewController.swift */,
 				EEBF602A26BF4EDF00ED357B /* ToDoTableViewController.swift */,
 				EE39F23626C0369F005FF229 /* ToDoDetailTableViewController.swift */,
-				EE15E86B2758F4270016A941 /* DiffableDataSource.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -138,6 +145,7 @@
 				EEA69930276194330093792D /* Model */,
 				EEA69931276195110093792D /* View */,
 				EEA699322761953A0093792D /* Controller */,
+				EE05E68F282BD5FA000F0D45 /* Protocols */,
 				EE27D3B227619B4400A46116 /* Resources */,
 			);
 			path = theApp1;

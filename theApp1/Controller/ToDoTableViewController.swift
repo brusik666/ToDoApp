@@ -37,8 +37,16 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewSectionHeader.identifier) as! TableViewSectionHeader
         switch section {
-        case 0: headerView.setTitle(title: Section.uncompleteToDo.title)
-        case 1: headerView.setTitle(title: Section.completeToDo.title)
+        case 0: if dataBase?.existingTodosByCompletion[0].count == 0 {
+            headerView.setTitle(title: "")
+        } else {
+            headerView.setTitle(title: Section.uncompleteToDo.title)
+        }
+        case 1: if dataBase?.existingTodosByCompletion[1].count == 0 {
+            headerView.setTitle(title: "")
+        } else {
+            headerView.setTitle(title: Section.completeToDo.title)
+        }
         default: break
         }
         tableView.addSubview(headerView)
@@ -57,7 +65,9 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate, UNUserNo
             let todo = self.dataBase!.existingTodosByCompletion[indexPath.section][indexPath.row]
             guard let index = self.dataBase!.existingTodos.firstIndex(of: todo) else { return }
             self.dataBase!.existingTodos.remove(at: index)
-            self.tableViewDataSource.apply(self.todoSnapshot, animatingDifferences: true, completion: nil)
+            self.tableViewDataSource.apply(self.todoSnapshot, animatingDifferences: true) {
+                self.tableView.reloadData()
+            }
         }
         let swipeConfig = UISwipeActionsConfiguration(actions: [action])
         
